@@ -1,6 +1,6 @@
 //--------------------------------------------------
 // class Antenna_Response
-//-------------------------------------------------- 
+//--------------------------------------------------
 //
 
 #ifndef REPORT_H
@@ -72,7 +72,7 @@ class Antenna_r {
         vector <double> Mag;  // magnification factor
         vector <double> Fresnel;  // Fresnel factor
         vector <double> Pol_factor;  // Polarization factor
-        
+
         vector < vector <double> > Vm_zoom;  // E field before ant T-domain
         vector < vector <double> > Vm_zoom_T;  // E field before ant T-domain time
         //vector < vector <double> > Vm_wo_antfactor;  // before applying ApplyAntFactors
@@ -127,13 +127,13 @@ class Antenna_r {
         int Likely_Sol; // comparing Trig_Pass and SignalBin value, this value returns which ray trace solution has been triggered (not perfect but most likely)
 
         int SingleChannelTriggers; // how many bins passed the threshold in this channel (should be equal to size of SCT_threshold_pass).
-        vector <double> SCT_threshold_pass; // for each bin that passed, what was the threshold value at which it passed (for TRIG_SCAN_MODE only). 
-	
+        vector <double> SCT_threshold_pass; // for each bin that passed, what was the threshold value at which it passed (for TRIG_SCAN_MODE only).
+
 	long TotalBinsScannedPerChannel;
-	
+
         vector <int> TooMuch_Tdelay;    // 0 is PeakV is located inside the DATA_BIN_SIZE array,  1 is when PeakV is located outside the DATA_BIN_SIZE so that we can't correctly check if it is triggered or not
 
-        
+
         void clear ();  // clear all vector format information for next event
         void clear_useless ( Settings *settings1 );  // clear all vector information which are useless
 
@@ -153,7 +153,7 @@ class String_r {
 class Station_r {
     public:
         //int trg;    // if any antenna trigg in the event. 0 : no antenna trg
-                    //                                    1: 1 or more antenna trg 
+                    //                                    1: 1 or more antenna trg
         vector <String_r> strings;
         vector <Surface_antenna_r> surfaces;
 
@@ -163,18 +163,18 @@ class Station_r {
         int Total_ray_sol;          // total number of ray_sols in the stations. If there is 0 Total_ray_sol, we don't need to do trigger check while there is any Total_ray_sol, we do trigger check.
         int Global_Pass;    // if global trigger passed or not: 0 = not passed, >0 passed, number indicates the first bin in the triggered window of the waveform at which the global trigger passed
 
-        int total_trig_search_bin;  // total number of bins for searching trigger. 
+        int total_trig_search_bin;  // total number of bins for searching trigger.
 
 //         int numChan;
 // 	int numChanVpol;
 // 	int numChanHpol;
-        
+
         // TDR is for Tunnel Diode Response i.e. the value on which the trigger happened
         vector <double> TDR_all;
 	vector <double> TDR_all_sorted;
 	vector <double> TDR_Hpol_sorted;
 	vector <double> TDR_Vpol_sorted;
-        
+
         ClassDef(Station_r,3);
 };
 
@@ -203,7 +203,7 @@ class Report {
            int triggerCheckLoop(Settings *settings1, Detector *detector, Event *event, Trigger *trigger, int stationID, int trig_search_init, int max_total_bin, int trig_window_bin, int scan_mode=1);
 // 	   int triggerCheckLoopScan();
 // 	   int triggerCheckLoopScanNumbers();
-	   
+
            int saveTriggeredEvent(Settings *settings1, Detector *detector, Event *event, Trigger *trigger, int stationID, int trig_search_init, int max_total_bin, int trig_window_bin, int last_trig_bin);
 
            vector < vector < vector <double> > > RayStep;
@@ -224,7 +224,7 @@ class Report {
     //make the UsefulIcrrStationEvent for use with AraRoot
     //UsefulIcrrStationEvent theUsefulEvent;
 
-    
+
         void Initialize (Detector *detector, Settings *settings1);
 
         //void Connect_Interaction_Detector (Event *event, Detector *detector, RaySolver *raysolver, Signal *signal, IceModel *icemodel, Settings *settings1, Trigger *trigger);
@@ -232,23 +232,23 @@ class Report {
 
 
 //        void Connect_Interaction_Detector (Event *event, Detector *detector, RaySolver *raysolver, Signal *signal, IceModel *icemodel, Settings *settings1, Trigger *trigger, UsefulIcrrStationEvent *theUsefulEvent);
-    
+
 //    void Connect_Interaction_Detector (Event *event, Detector *detector, RaySolver *raysolver, Signal *signal, IceModel *icemodel, Settings *settings1, Trigger *trigger);
-    
-    void Connect_Interaction_Detector (Event *event, Detector *detector, RaySolver *raysolver, Signal *signal, IceModel *icemodel, Settings *settings1, Trigger *trigger, int evt);    
-    
-    
+
+    void Connect_Interaction_Detector (Event *event, Detector *detector, RaySolver *raysolver, Signal *signal, IceModel *icemodel, Settings *settings1, Trigger *trigger, int evt);
+
+
 #ifdef ARA_UTIL_EXISTS
 
     void MakeUsefulEvent(Detector *detector, Settings *settings1, Trigger *trigger, int stationID, int stationIndex, UsefulIcrrStationEvent *theUsefulEvent);
     void MakeUsefulEvent(Detector *detector, Settings *settings1, Trigger *trigger, int stationID, int stationIndex, UsefulAtriStationEvent *theUsefulEvent);
 #endif
-    
+
     void ClearUselessfromConnect(Detector *detector, Settings *settings1, Trigger *trigger);
 
-    
+
         void Select_Wave_Convlv_Exchange(Settings *settings1, Trigger *trigger, Detector *detector, int signalbin, vector <double> &V, int *noise_ID, int ID, int StationIndex);   // literally get noise waveform from trigger class and add signal voltage "V" and do convlv. convlv result will replace the value in Full_window array
-        
+
         void Select_Wave_Convlv_Exchange(Settings *settings1, Trigger *trigger, Detector *detector, int signalbin_1, int signalbin_2, vector <double> &V1, vector <double> &V2, int *noise_ID, int ID, int StationIndex);   // literally get noise waveform from trigger class and add signal voltage "V" and do convlv. convlv result will replace the value in Full_window array
 
         void Select_Wave_Convlv_Exchange(Settings *settings1, Trigger *trigger, Detector *detector, int signalbin_0, int signalbin_1, int signalbin_2, vector <double> &V0, vector <double> &V1, vector <double> &V2, int *noise_ID, int ID, int StationIndex);   // literally get noise waveform from trigger class and add signal voltage "V" and do convlv. convlv result will replace the value in Full_window array
@@ -268,7 +268,7 @@ class Report {
 
         void ApplyAntFactors(double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vmmhz);
 
-        void ApplyAntFactors_Tdomain(double AntPhase, double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_real, double &vm_img, Settings *settings1);
+        void ApplyAntFactors_Tdomain(double AntPhase, double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_real, double &vm_img, Settings *settings1, double antenna_theta, double antenna_phi);
 
         void ApplyAntFactors_Tdomain_Transmitter(double AntPhase, double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_real, double &vm_img, Settings *settings1);
 
@@ -326,7 +326,7 @@ class Report {
 
 
 
-        int GetChannelNum8_LowAnt(int string_num, int antenna_num); // just return ch numbers 1-8 for antenna 0-1 (bottom antennas) and higher ch numbers for antenna 2-3 (top antennas) this is used for only TRIG_ONLY_LOW_CH_ON=1 mode with 
+        int GetChannelNum8_LowAnt(int string_num, int antenna_num); // just return ch numbers 1-8 for antenna 0-1 (bottom antennas) and higher ch numbers for antenna 2-3 (top antennas) this is used for only TRIG_ONLY_LOW_CH_ON=1 mode with
 
 
 	TGraph *getWaveform(Detector *detector, int ch, int station_i=0, int event_num=0, int run_num=0);
@@ -334,12 +334,12 @@ class Report {
 	vector<TGraph*> getWaveformVector(Detector *detector, int station_i=0, int event_num=0, int run_num=0);
 	vector<TGraph*> getWaveformVectorVpol(Detector *detector, int station_i=0, int event_num=0, int run_num=0);
 	vector<TGraph*> getWaveformVectorHpol(Detector *detector, int station_i=0, int event_num=0, int run_num=0);
-	
+
 	vector<double> getHitTimesVector(Detector *detector, int station_i=0, int polarization=-1);// -1 for all pol, 0 for Vpol, 1: for Hpol
 	vector<double> getHitTimesVectorVpol(Detector *detector, int station_i=0);
 	vector<double> getHitTimesVectorHpol(Detector *detector, int station_i=0);
 
-	
+
         vector <double> Vfft_noise_after;   // noise Vfft after get_random_rician
         vector <double> Vfft_noise_before;   // noise Vfft before get_random_rician
         //vector <double> V_noise_timedomain;   // noise V timedomain after get_random_rician and inverse fft
