@@ -671,7 +671,7 @@ void Report::Connect_Interaction_Detector (Event *event, Detector *detector, Ray
                                                Pol_vector = n_trg_slappy + n_trg_pokey;
                                            }
 
-                                           ApplyAntFactors(heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, vmmhz1m_tmp);
+                                           ApplyAntFactors(heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, vmmhz1m_tmp, antenna_theta, antenna_phi);
 
 					   //cout << "Check 2" << endl;
                                            //stations[i].strings[j].antennas[k].VHz_antfactor[ray_sol_cnt].push_back( vmmhz1m_tmp );
@@ -955,18 +955,18 @@ void Report::Connect_Interaction_Detector (Event *event, Detector *detector, Ray
                                                        if ( settings1->ALL_ANT_V_ON==0 ) {
 
                                                            ApplyAntFactors_Tdomain( detector->GetAntPhase_1D( freq_tmp*1.e-6, antenna_theta, antenna_phi, detector->stations[i].strings[j].antennas[k].type ),
-                                                               heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+                                                               heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
                                                        }
                                                        else if ( settings1->ALL_ANT_V_ON==1 ) {
                                                            ApplyAntFactors_Tdomain( detector->GetAntPhase_1D( freq_tmp*1.e-6, antenna_theta, antenna_phi, 0 ),
-                                                               heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+                                                               heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
                                                        }
 
 
 
                                                    }
                                                    else {
-                                                       ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1] );
+                                                       ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], antenna_theta, antenna_phi );
                                                    }
 
 
@@ -1261,18 +1261,18 @@ void Report::Connect_Interaction_Detector (Event *event, Detector *detector, Ray
 					     if ( settings1->ALL_ANT_V_ON==0 ) {
 
 					       ApplyAntFactors_Tdomain( detector->GetAntPhase_1D( freq_tmp*1.e-6, antenna_theta, antenna_phi, detector->stations[i].strings[j].antennas[k].type ),
-									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
 					     }
 					     else if ( settings1->ALL_ANT_V_ON==1 ) {
 					       ApplyAntFactors_Tdomain( detector->GetAntPhase_1D( freq_tmp*1.e-6, antenna_theta, antenna_phi, 0 ),
-									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
 					     }
 
 
 
 					   }
 					   else {
-					     ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1] );
+					     ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], antenna_theta, antenna_phi );
 					   }
 
 					   //
@@ -1541,18 +1541,18 @@ void Report::Connect_Interaction_Detector (Event *event, Detector *detector, Ray
 					     if ( settings1->ALL_ANT_V_ON==0 ) {
 
 					       ApplyAntFactors_Tdomain_Transmitter( detector->GetAntPhase_1D( freq_tmp*1.e-6, ant_theta_trans, antenna_phi, detector->stations[i].strings[j].antennas[k].type ),
-										    heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+										    heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
 					     }
 					     else if ( settings1->ALL_ANT_V_ON==1 ) {
 					       ApplyAntFactors_Tdomain_Transmitter( detector->GetAntPhase_1D( freq_tmp*1.e-6, ant_theta_trans, antenna_phi, 0 ),
-										    heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+										    heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenan_theta, antenna_phi );
 					     }
 
 
 
 					   }
 					   else {
-					     ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin_trans, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1] );
+					     ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin_trans, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], antenna_theta, antenna_phi );
 					   }
 
 					   //
@@ -1598,18 +1598,18 @@ void Report::Connect_Interaction_Detector (Event *event, Detector *detector, Ray
 					     if ( settings1->ALL_ANT_V_ON==0 ) {
 
 					       ApplyAntFactors_Tdomain( detector->GetAntPhase_1D( freq_tmp*1.e-6, antenna_theta, antenna_phi, detector->stations[i].strings[j].antennas[k].type ),
-									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
 					     }
 					     else if ( settings1->ALL_ANT_V_ON==1 ) {
 					       ApplyAntFactors_Tdomain( detector->GetAntPhase_1D( freq_tmp*1.e-6, antenna_theta, antenna_phi, 0 ),
-									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1 );
+									heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
 					     }
 
 
 
 					   }
 					   else {
-					     ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1] );
+					     ApplyAntFactors_Tdomain_FirstTwo( heff, heff_lastbin, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], antenna_theta, antenna_phi );
 					   }
 
 					   //
@@ -4008,18 +4008,35 @@ double Report::GaintoHeight(double gain, double freq, double n_medium) {
 }
 
 
-void Report::ApplyAntFactors(double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vmmhz) {  // vmmhz is input and output. output will have some antenna factors on it
+void Report::ApplyAntFactors(double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vmmhz, double antenna_theta, double antenna_phi) {  // vmmhz is input and output. output will have some antenna factors on it
 
     //double pol_factor;
 
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+   antenna_phi*=(PI/180);
+   antenna_theta*=(PI/180);
+
+    Vector thetaHat = Vector(cos(antenna_theta)*cos(antenna_phi),
+                             cos(antenna_theta)*sin(antenna_phi),
+                             -sin(antenna_theta));
+
+    Vector phiHat = Vector(-sin(antenna_phi),
+                           cos(antenna_phi),
+                           0);
     if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+        pol_factor = Pol_vector *thetaHat;
     }
     else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+        pol_factor = Pol_vector *phiHat;
     }
     pol_factor = abs(pol_factor);
-
+	
     // apply 3dB spliter, d nu to prepare FFT
     // now actually vmmhz is not V/m/MHz but V/m/Hz unit
     //vmmhz = vmmhz/sqrt(2.)/(settings1->TIMESTEP*1.E6); //sqrt(2) for 3dB spliter for TURF, SURF
@@ -4036,21 +4053,37 @@ void Report::ApplyAntFactors(double heff, Vector &n_trg_pokey, Vector &n_trg_sla
 
 
 
-void Report::ApplyAntFactors_Tdomain (double AntPhase, double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_real, double &vm_img, Settings *settings1) {  // vm is input and output. output will have some antenna factors on it
+void Report::ApplyAntFactors_Tdomain (double AntPhase, double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_real, double &vm_img, Settings *settings1, double antenna_theta, double antenna_phi) {  // vm is input and output. output will have some antenna factors on it
 
 
 
     //double pol_factor;
 
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+
+   antenna_phi*=(PI/180);
+   antenna_theta*=(PI/180);
+
+    Vector thetaHat = Vector(cos(antenna_theta)*cos(antenna_phi),
+                             cos(antenna_theta)*sin(antenna_phi),
+                             -sin(antenna_theta));
+
+    Vector phiHat = Vector(-sin(antenna_phi),
+                           cos(antenna_phi),
+                           0);
     if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+        pol_factor = Pol_vector *thetaHat;
     }
     else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+        pol_factor = Pol_vector *phiHat;
     }
     pol_factor = abs(pol_factor);
-
-
 
     if ( settings1->PHASE_SKIP_MODE != 1 ) {
 
@@ -4101,20 +4134,36 @@ void Report::ApplyAntFactors_Tdomain (double AntPhase, double heff, Vector &n_tr
 
 
 
-void Report::ApplyAntFactors_Tdomain_Transmitter (double AntPhase, double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_real, double &vm_img, Settings *settings1) {  // vm is input and output. output will have some antenna factors on it
+void Report::ApplyAntFactors_Tdomain_Transmitter (double AntPhase, double heff, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_real, double &vm_img, Settings *settings1, double antenna_theta, double antenna_phi) {  // vm is input and output. output will have some antenna factors on it
 
 
 
     //double pol_factor;
 
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+   antenna_phi*=(PI/180);
+   antenna_theta*=(PI/180);
+
+    Vector thetaHat = Vector(cos(antenna_theta)*cos(antenna_phi),
+                             cos(antenna_theta)*sin(antenna_phi),
+                             -sin(antenna_theta));
+
+    Vector phiHat = Vector(-sin(antenna_phi),
+                           cos(antenna_phi),
+                           0);
     if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+        pol_factor = Pol_vector *thetaHat;
     }
     else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+        pol_factor = Pol_vector *phiHat;
     }
     pol_factor = abs(pol_factor);
-
 
 
     if ( settings1->PHASE_SKIP_MODE != 1 ) {
@@ -4168,20 +4217,38 @@ void Report::ApplyAntFactors_Tdomain_Transmitter (double AntPhase, double heff, 
 
 
 
-void Report::ApplyAntFactors_Tdomain_FirstTwo (double heff, double heff_lastbin, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_bin0, double &vm_bin1) {  // vm is input and output. output will have some antenna factors on it
+void Report::ApplyAntFactors_Tdomain_FirstTwo (double heff, double heff_lastbin, Vector &n_trg_pokey, Vector &n_trg_slappy, Vector &Pol_vector, int ant_type, double &pol_factor, double &vm_bin0, double &vm_bin1, double antenna_theta, double antenna_phi) {  // vm is input and output. output will have some antenna factors on it
 
 
 
     //double pol_factor;
 
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+   antenna_phi*=(PI/180);
+   antenna_theta*=(PI/180);
+
+    Vector thetaHat = Vector(cos(antenna_theta)*cos(antenna_phi),
+                             cos(antenna_theta)*sin(antenna_phi),
+                             -sin(antenna_theta));
+
+    Vector phiHat = Vector(-sin(antenna_phi),
+                           cos(antenna_phi),
+                           0);
     if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+        pol_factor = Pol_vector *thetaHat;
     }
     else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+        pol_factor = Pol_vector *phiHat;
     }
     pol_factor = abs(pol_factor);
-
+	
+	
     vm_bin0 = vm_bin0 / sqrt(2.) * 0.5 * heff * pol_factor; // sqrt(2) for 3dB splitter for TURF, SURF, 0.5 to calculate power with heff
     vm_bin1 = vm_bin1 / sqrt(2.) * 0.5 * heff_lastbin * pol_factor; // sqrt(2) for 3dB splitter for TURF, SURF, 0.5 to calculate power with heff
 
