@@ -4012,13 +4012,22 @@ void Report::ApplyAntFactors(double heff, Vector &n_trg_pokey, Vector &n_trg_sla
 
     //double pol_factor;
 
-    if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+    double pol_factor_v = n_trg_pokey * Pol_vector;
+    double pol_factor_h = sqrt(1 - pow(pol_factor_v, 2.0));
+    if(ant_type==0){
+        pol_factor = pol_factor_v;
     }
-    else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+    else if(ant_type==1){
+        pol_factor = pol_factor_h;
     }
-    pol_factor = abs(pol_factor);
+    pol_factor = abs(pol_factor); // take abs value
 
     // apply 3dB spliter, d nu to prepare FFT
     // now actually vmmhz is not V/m/MHz but V/m/Hz unit
@@ -4042,14 +4051,22 @@ void Report::ApplyAntFactors_Tdomain (double AntPhase, double heff, Vector &n_tr
 
     //double pol_factor;
 
-    if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+    double pol_factor_v = n_trg_pokey * Pol_vector;
+    double pol_factor_h = sqrt(1 - pow(pol_factor_v, 2.0));
+    if(ant_type==0){
+        pol_factor = pol_factor_v;
     }
-    else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+    else if(ant_type==1){
+        pol_factor = pol_factor_h;
     }
-    pol_factor = abs(pol_factor);
-
+    pol_factor = abs(pol_factor); // take abs value
 
 
     if ( settings1->PHASE_SKIP_MODE != 1 ) {
@@ -4107,14 +4124,22 @@ void Report::ApplyAntFactors_Tdomain_Transmitter (double AntPhase, double heff, 
 
     //double pol_factor;
 
-    if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+    double pol_factor_v = n_trg_pokey * Pol_vector;
+    double pol_factor_h = sqrt(1 - pow(pol_factor_v, 2.0));
+    if(ant_type==0){
+        pol_factor = pol_factor_v;
     }
-    else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+    else if(ant_type==1){
+        pol_factor = pol_factor_h;
     }
-    pol_factor = abs(pol_factor);
-
+    pol_factor = abs(pol_factor); // take abs value
 
 
     if ( settings1->PHASE_SKIP_MODE != 1 ) {
@@ -4174,13 +4199,22 @@ void Report::ApplyAntFactors_Tdomain_FirstTwo (double heff, double heff_lastbin,
 
     //double pol_factor;
 
-    if (ant_type == 0) {    // if v pol
-        pol_factor = n_trg_pokey * Pol_vector;
+//     if (ant_type == 0) {    // if v pol
+//         pol_factor = n_trg_pokey * Pol_vector;
+//     }
+//     else if (ant_type == 1) {   // if h pol
+//         pol_factor = n_trg_slappy * Pol_vector;
+//     }
+//     pol_factor = abs(pol_factor);
+    double pol_factor_v = n_trg_pokey * Pol_vector;
+    double pol_factor_h = sqrt(1 - pow(pol_factor_v, 2.0));
+    if(ant_type==0){
+        pol_factor = pol_factor_v;
     }
-    else if (ant_type == 1) {   // if h pol
-        pol_factor = n_trg_slappy * Pol_vector;
+    else if(ant_type==1){
+        pol_factor = pol_factor_h;
     }
-    pol_factor = abs(pol_factor);
+    pol_factor = abs(pol_factor); // take abs value
 
     vm_bin0 = vm_bin0 / sqrt(2.) * 0.5 * heff * pol_factor; // sqrt(2) for 3dB splitter for TURF, SURF, 0.5 to calculate power with heff
     vm_bin1 = vm_bin1 / sqrt(2.) * 0.5 * heff_lastbin * pol_factor; // sqrt(2) for 3dB splitter for TURF, SURF, 0.5 to calculate power with heff
