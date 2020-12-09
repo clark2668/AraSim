@@ -1545,7 +1545,7 @@ void Report::Connect_Interaction_Detector (Event *event, Detector *detector, Ray
 					     }
 					     else if ( settings1->ALL_ANT_V_ON==1 ) {
 					       ApplyAntFactors_Tdomain_Transmitter( detector->GetAntPhase_1D( freq_tmp*1.e-6, ant_theta_trans, antenna_phi, 0 ),
-										    heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenan_theta, antenna_phi );
+										    heff, n_trg_pokey, n_trg_slappy, Pol_vector, detector->stations[i].strings[j].antennas[k].type, Pol_factor, V_forfft[2*n], V_forfft[2*n+1], settings1, antenna_theta, antenna_phi );
 					     }
 
 
